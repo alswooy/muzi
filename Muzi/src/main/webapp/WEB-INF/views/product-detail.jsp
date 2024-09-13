@@ -81,6 +81,14 @@
     <!-- 제출 버튼 -->
     <button type="submit" id="cartAdd">장바구니</button>
     <button type="submit" id="order">바로구매</button>
+
+</form>
+
+<form id="updateProductForm" method="get" action="update-product">
+    <!-- 상품 번호를 숨겨진 필드로 설정 -->
+    <input type="hidden" id="productNumber" name="productNumber" value="${product.productNumber}">
+    <!-- 수정 버튼 -->
+    <button type="submit" id="updateProductButton">상품 수정</button>
 </form>
 <c:forEach var="entry" items="${attribute}">
     <c:if test = "${entry.key==0}">

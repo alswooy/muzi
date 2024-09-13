@@ -16,7 +16,7 @@
 
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
-		<property name="url" value="${db.url}?useUnicode=true&amp;characterEncoding=utf8"></property>
+		<property name="url" value="${db.url}?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=utf8"></property>
 		<property name="username" value="${db.username}"></property>
 		<property name="password" value="${db.password}"></property>
 	</bean>
@@ -33,6 +33,43 @@
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
+
+	<!-- JavaMailSender 설정 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com"/>
+		<property name="port" value="587"/>
+		<property name="username" value="rlaeksl0124"/>
+		<property name="password" value="tksahpcxsztotxor"/>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtps.checkserveridentity">true</prop>
+				<prop key="mail.smtps.ssl.trust">smtp.gmail.com</prop>
+				<prop key="mail.debug">true</prop>
+				<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 최대 업로드 파일 크기 설정 -->
+		<property name="maxUploadSize" value="5242880"/> <!-- 5MB -->
+	</bean>
+
+
+	<bean id="redisConnectionFactory"
+		  class="org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory"
+		  p:host-name="${redis.host}"
+		  p:port="${redis.port}"
+		  p:password="${redis.password}" />
+
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+		<property name="connectionFactory" ref="redisConnectionFactory" />
+	</bean>
+
+	<context:component-scan base-package="com.Toy2"/>
 
 	<!-- 스케줄러 기능 활성화 -->
 	<mvc:annotation-driven/>

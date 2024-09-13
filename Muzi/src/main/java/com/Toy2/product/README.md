@@ -9,6 +9,8 @@
 - [x] 1개씩 crud
 - [x] paging 
 - [x] 여러개 삽입
+- [] 게시글 수정
+  - 
 - [] 복수 조회
 - [] 복수 수정
 - [] 복수 삭제
@@ -48,6 +50,14 @@
 - 참고 사항
 - 상품 코드
 - 배송비
+
+
+### 상품 수정
+- 상품 이름, 가격, 내용 등등 dto로 받음
+- dto는 `List<ProductOptionDto>`를 포함한다.
+- 옵션은 `List<ProductOptionDto>`로 수정된 결과를 받음 
+  - `opt_no` = `optionNumber` 인 행의 `optionName`, `optionDetail`, `status` 변경
+- 
 
 ## 카테고리 기능 구현
 

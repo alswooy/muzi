@@ -55,6 +55,12 @@
         <button type="submit">Submit</button>
     </form>
 
+        <form action="/multi" method="POST" enctype="multipart/form-data">
+            <input type="file" name="multipartFile" accept="image/*" required>
+            <button type="submit">Upload</button>
+        </form>
+
+
     <script>
 document.getElementById('productForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the default form submission

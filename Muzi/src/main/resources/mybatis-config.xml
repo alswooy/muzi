@@ -21,7 +21,7 @@
 
 		<!--K-KY-->
 		<typeAlias type="com.Toy2.product.db.dto.ProductDto" alias="ProductDto"/>
-		<typeAlias type="com.Toy2.product.db.dto.request.ProductInsertRequestDto" alias="ProductInsertRequestDto"/>
+		<typeAlias type="com.Toy2.product.db.dto.request.ProductRequestDto" alias="ProductRequestDto"/>
 		<typeAlias type="com.Toy2.product.db.dto.request.ProductUpdateRequestDto" alias="ProductUpdateRequestDto"/>
 		<typeAlias type="com.Toy2.product.db.dto.request.ProductPageRequestDto" alias="ProductPageRequestDto"/>
 		<typeAlias type="com.Toy2.product.productdetail.db.dto.ProductPictureDto" alias="ProductPictureDto"/>
@@ -29,10 +29,13 @@
 		<typeAlias type="com.Toy2.product.productdetail.db.dto.ProductSizeDto" alias="ProductSizeDto"/>
 		<typeAlias type="com.Toy2.productcategory.db.dto.ProductCategoryDto" alias="ProductCategoryDto"/>
 		<typeAlias type="com.Toy2.product.option.db.dto.request.OptionRequestDto" alias="OptionRequestDto"/>
+		<typeAlias type="com.Toy2.product.option.db.dto.request.OptionDeleteRequestDto" alias="OptionDeleteRequestDto"/>
+		<typeAlias type="com.Toy2.product.option.db.dto.request.OptionUpdateRequestDto" alias="OptionUpdateRequestDto"/>
 		<typeAlias type="com.Toy2.productcategory.db.dto.request.ProductCategoryUpdateRequestDto" alias="ProductCategoryUpdateRequestDto"/>
 		<typeAlias type="com.Toy2.productcategory.categoryclosure.db.dto.ProductCategoryClosureDto" alias="ProductCategoryClosureDto"/>
 		<typeAlias type="com.Toy2.productcategory.categoryclosure.db.dto.request.CategoryClosureInsertRequestDto" alias="CategoryClosureInsertRequestDto"/>
 		<typeAlias type="com.Toy2.product.option.db.dto.ProductOptionDto" alias="ProductOptionDto"/>
+		<typeAlias type="com.Toy2.product.picture.dto.PictureUploadDto" alias="PictureUploadDto"/>
 		<!--K-KY-->
 		<typeAlias type="com.Toy2.Notice.entity.PageHandler" alias="pageHandler" />
 		<typeAlias type="com.Toy2.Notice.domain.NoticeDto" alias="NoticeDto" />

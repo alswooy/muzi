@@ -18,7 +18,7 @@
         <Logger name="org.springframework.session" level="DEBUG" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
-        <Logger name="org.springframework.data.redis" level="TRACE" additivity="false">
+        <Logger name="org.springframework.data.redis" level="WARN" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
     </Loggers>

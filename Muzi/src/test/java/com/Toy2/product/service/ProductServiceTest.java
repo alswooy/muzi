@@ -1,7 +1,7 @@
 package com.Toy2.product.service;
 
 import com.Toy2.product.db.dto.ProductDto;
-import com.Toy2.product.db.dto.request.ProductInsertRequestDto;
+import com.Toy2.product.db.dto.request.ProductRequestDto;
 import com.Toy2.product.db.dto.request.ProductPageRequestDto;
 import com.Toy2.product.db.dto.request.ProductUpdateRequestDto;
 import com.Toy2.product.domain.service.ProductService;
@@ -85,7 +85,6 @@ public class ProductServiceTest {
                 .productName("테스트 수정 상품")
                 .newItem(false)
                 .discountable(true)
-                .amount(10000)
                 .notice("없음")
                 .productCode("qqqqqq")
                 .deliveryFee(50000)
@@ -145,12 +144,12 @@ public class ProductServiceTest {
     }
 
     @Test
-    @Commit
+    @Transactional
     public void 페이지_옵션_삽입() {
         Map<String, List<String>> map = new HashMap<>();
         map.put("옵션", List.of("1", "2", "3"));
-        ProductInsertRequestDto dto = new ProductInsertRequestDto(
-                10000, "상품 1", true, true,
+        ProductRequestDto dto = new ProductRequestDto(
+                10000, "상품 1",  true,
                 true, "상품 설명", "1234", 12345, false, map);
         System.out.println("dto = " + dto);
         productService.insertProductAndOption(dto);

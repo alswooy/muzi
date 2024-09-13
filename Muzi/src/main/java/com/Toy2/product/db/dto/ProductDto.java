@@ -13,7 +13,7 @@ public class ProductDto {
     private final String productCode;
     private final int deliveryFee;
     private final boolean privateProduct;
-
+    private final Integer mainImage;
 
 
     /**
@@ -32,10 +32,10 @@ public class ProductDto {
      * MyBatis에서 Builder를 자동으로 찾아서 사용하지 않음<br>
      * resultType를 builder로 바꾸면 될까 싶지만 시도 해보지는 않음
      */
-    public ProductDto(int productNumber, int productPrice, String productName,
-                      boolean newItem, boolean postingStatus,
-                      boolean discountable, int productAmount, String notice,
-                      int viewCount, String productCode, int deliveryFee, boolean privateProduct) {
+
+    public ProductDto(int productNumber, int productPrice, String productName, boolean newItem,
+                      boolean postingStatus, boolean discountable, int productAmount, String notice,
+                      int viewCount, String productCode, int deliveryFee, boolean privateProduct, Integer mainImage) {
         this.productNumber = productNumber;
         this.productPrice = productPrice;
         this.productName = productName;
@@ -48,7 +48,9 @@ public class ProductDto {
         this.productCode = productCode;
         this.deliveryFee = deliveryFee;
         this.privateProduct = privateProduct;
+        this.mainImage = mainImage;
     }
+
 
 
 
@@ -65,6 +67,7 @@ public class ProductDto {
         this.productCode = builder.productCode;
         this.deliveryFee = builder.deliveryFee;
         this.privateProduct = builder.privateProduct;
+        this.mainImage = builder.mainImage;
     }
 
 
@@ -118,6 +121,10 @@ public class ProductDto {
         return privateProduct;
     }
 
+    public Integer getMainImage() {
+        return mainImage;
+    }
+
     @Override
     public String toString() {
         return "ProductDto{" +
@@ -149,7 +156,7 @@ public class ProductDto {
         private String productCode;
         private int deliveryFee;
         private boolean privateProduct;
-
+        private  Integer mainImage;
 
         public Builder productNumber(int productNumber) {
             this.productNumber = productNumber;
@@ -208,6 +215,11 @@ public class ProductDto {
 
         public Builder privateProduct(boolean privateProduct) {
             this.privateProduct = privateProduct;
+            return this;
+        }
+
+        public Builder mainImage(Integer mainImage) {
+            this.mainImage = mainImage;
             return this;
         }
 

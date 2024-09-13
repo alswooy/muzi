@@ -8,8 +8,20 @@
         SELECT count(*) FROM `option`;
     </select>
 
-    <select id="selectOptions" parameterType="int" resultType="ProductOptionDto">
-        SELECT * FROM `option` WHERE pdt_no = #{productNumber};
+    <resultMap id="ProductOptionResultMap" type="ProductOptionDto">
+        <id property="optionNumber" column="opt_no" />
+        <result property="productNumber" column="pdt_no" />
+        <result property="optionName" column="opt_name" />
+        <result property="optionDetail" column="opt_detail" />
+        <result property="status" column="status" />
+        <result property="required" column="required"/>
+        <result property="optionType" column="opt_type"/>
+    </resultMap>
+
+    <select id="selectOptions" resultMap="ProductOptionResultMap">
+        SELECT *
+        FROM option
+        WHERE pdt_no = #{productNumber}
     </select>
 
     <select id="selectOption" parameterType="int" resultType="ProductOptionDto">
@@ -17,15 +29,54 @@
     </select>
 
     <insert id="insertProductOption" parameterType="OptionRequestDto">
-        INSERT INTO `option`(pdt_no, opt_name, opt_detail, status) VALUES(#{productNumber}, #{optionName}, #{optionDetail}, #{status})
+        INSERT INTO `option`(pdt_no, opt_name, opt_detail, status, required, opt_type)
+        VALUES(#{productNumber}, #{optionName}, #{optionDetail}, #{status}, #{required}, #{optionType})
     </insert>
 
     <insert id="insertOptions" parameterType="OptionRequestDto">
-        INSERT INTO `option` (pdt_no, opt_name, opt_detail, status)
+        INSERT INTO `option` (pdt_no, opt_name, opt_detail, status, required, opt_type)
         VALUES
         <foreach collection="optionDetails" item="detail" separator=",">
-            (#{productNumber}, #{optionName}, #{detail}, #{status})
+            (#{productNumber}, #{optionName}, #{detail}, #{status}, #{required}, #{optionType})
         </foreach>
     </insert>
 
+    <update id="updateProductOptions" parameterType="java.util.List">
+        <foreach collection="list" item="option">
+            UPDATE `option`
+            SET
+            opt_name = #{option.optionName},
+            opt_detail = #{option.optionDetail},
+            status = #{option.status},
+            required = #{option.required},
+            opt_type = #{option.optionType}
+            WHERE
+            pdt_no = #{option.productNumber} AND
+            opt_no = #{option.optionNumber};
+        </foreach>
+    </update>
+
+    <delete id="deleteProductOption" parameterType="OptionDeleteRequestDto">
+        DELETE FROM `option`
+        WHERE EXISTS (
+        SELECT 1 FROM `option`
+        WHERE pdt_no = #{productNumber}
+        AND opt_name = #{optionName}
+        )
+        AND pdt_no = #{productNumber}
+        AND opt_name = #{optionName};
+    </delete>
+
+    <delete id="deleteOptionValue" parameterType="int">
+        DELETE FROM `option`
+        WHERE EXISTS (
+        SELECT 1 FROM `option`
+        WHERE opt_no = #{optionNumber}
+        )
+        AND opt_no = #{optionNumber};
+    </delete>
+
+    <select id="optionNumberIsExist" parameterType="int">
+
+    </select>
 </mapper>

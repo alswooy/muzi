@@ -7,14 +7,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ProductInsertRequestDto {
+public class ProductRequestDto {
     @JsonProperty
     private Map<String, List<String>> productOptionData = new HashMap<>();
     private int productNumber;
     private int productPrice;
     private String productName;
     private boolean newItem;
-    private boolean postingStatus;
     private boolean discountable;
     private String notice;
     private String productCode;
@@ -32,14 +31,13 @@ public class ProductInsertRequestDto {
 
 
 
-    public ProductInsertRequestDto(int productPrice, String productName, boolean newItem,
-                                   boolean postingStatus, boolean discountable, String notice,
-                                   String productCode, int deliveryFee, boolean privateProduct,
-                                   Map<String, List<String>> productData) {
+    public ProductRequestDto(int productPrice, String productName, boolean newItem,
+                             boolean discountable, String notice,
+                             String productCode, int deliveryFee, boolean privateProduct,
+                             Map<String, List<String>> productData) {
         this.productPrice = productPrice;
         this.productName = productName;
         this.newItem = newItem;
-        this.postingStatus = postingStatus;
         this.discountable = discountable;
         this.notice = notice;
         this.productCode = productCode;
@@ -48,16 +46,15 @@ public class ProductInsertRequestDto {
         this.productOptionData = productData;
     }
 
-    public ProductInsertRequestDto(Map<String, List<String>> productData, int productNumber,
-                                   int productPrice, String productName, boolean newItem,
-                                   boolean postingStatus, boolean discountable, String notice,
-                                   String productCode, int deliveryFee, boolean privateProduct) {
+    public ProductRequestDto(Map<String, List<String>> productData, int productNumber,
+                             int productPrice, String productName, boolean newItem,
+                             boolean discountable, String notice,
+                             String productCode, int deliveryFee, boolean privateProduct) {
         this.productOptionData = productData;
         this.productNumber = productNumber;
         this.productPrice = productPrice;
         this.productName = productName;
         this.newItem = newItem;
-        this.postingStatus = postingStatus;
         this.discountable = discountable;
         this.notice = notice;
         this.productCode = productCode;
@@ -73,7 +70,7 @@ public class ProductInsertRequestDto {
         this.productNumber = productNumber;
     }
 
-    public ProductInsertRequestDto() {
+    public ProductRequestDto() {
     }
 
     public int getProductPrice() {
@@ -86,10 +83,6 @@ public class ProductInsertRequestDto {
 
     public boolean isNewItem() {
         return newItem;
-    }
-
-    public boolean isPostingStatus() {
-        return postingStatus;
     }
 
     public boolean isDiscountable() {
@@ -115,13 +108,12 @@ public class ProductInsertRequestDto {
 
     @Override
     public String toString() {
-        return "ProductInsertRequestDto{" +
+        return "ProductRequestDto{" +
                 "productOptionData=" + productOptionData +
                 ", productNumber=" + productNumber +
                 ", productPrice=" + productPrice +
                 ", productName='" + productName + '\'' +
                 ", newItem=" + newItem +
-                ", postingStatus=" + postingStatus +
                 ", discountable=" + discountable +
                 ", notice='" + notice + '\'' +
                 ", productCode='" + productCode + '\'' +

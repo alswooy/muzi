@@ -30,18 +30,18 @@
         #{notice}, #{deliveryFee}, #{privateProduct})
     </insert>
 
-    <insert id="insertProduct2" parameterType="ProductInsertRequestDto" useGeneratedKeys="true" keyProperty="productNumber">
+    <insert id="insertProduct2" parameterType="ProductRequestDto" useGeneratedKeys="true" keyProperty="productNumber">
         INSERT INTO product
-        (pdt_price, pdt_name, new_item, pst_status
+        (pdt_price, pdt_name, new_item
         , discountable, notice, delivery_fee, pdt_private)
         VALUES(#{productPrice},
         #{productName}, #{newItem},
-        #{postingStatus}, #{discountable},
+        #{discountable},
         #{notice}, #{deliveryFee}, #{privateProduct})
     </insert>
 
     <!--상품 업데이트-->
-    <update id="updateProduct" parameterType="ProductUpdateRequestDto">
+    <update id="updateProduct" parameterType="ProductRequestDto">
         UPDATE product
         SET pdt_price = #{productPrice},
         pdt_name = #{productName},
@@ -94,7 +94,5 @@
         where pd.pdt_no = #{productNumber} And pd.pdt_detail_title like "productSize%";
 
     </select>
-
-
 
 </mapper>

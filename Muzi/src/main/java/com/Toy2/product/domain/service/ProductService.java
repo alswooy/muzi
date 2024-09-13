@@ -2,11 +2,12 @@ package com.Toy2.product.domain.service;
 
 import com.Toy2.product.db.dao.ProductDao;
 import com.Toy2.product.db.dto.ProductDto;
-import com.Toy2.product.db.dto.request.ProductInsertRequestDto;
+import com.Toy2.product.db.dto.request.ProductRequestDto;
 import com.Toy2.product.db.dto.request.ProductPageRequestDto;
 import com.Toy2.product.db.dto.request.ProductUpdateRequestDto;
 import com.Toy2.product.option.db.dao.ProductOptionDao;
 import com.Toy2.product.option.db.dto.ProductOptionDto;
+import com.Toy2.product.option.db.dto.request.OptionDeleteRequestDto;
 import com.Toy2.product.option.db.dto.request.OptionRequestDto;
 import com.Toy2.product.productdetail.db.dao.ProductDetailDao;
 import com.Toy2.product.productdetail.db.dto.ProductPictureDto;
@@ -60,18 +61,18 @@ public class ProductService {
     }
 
     @Transactional
-    public boolean insertProductAndOption(ProductInsertRequestDto productInsertRequestDto) {
+    public boolean insertProductAndOption(ProductRequestDto productRequestDto) {
         System.out.println("ProductService.insertProductAndOption");
-        return productDao.insert(productInsertRequestDto) && insertProductOption(productInsertRequestDto);
+        return productDao.insert(productRequestDto) && insertProductOption(productRequestDto);
     }
 
     @Transactional
-    private boolean insertProductOption(ProductInsertRequestDto productInsertRequestDto) {
+    private boolean insertProductOption(ProductRequestDto productRequestDto) {
         System.out.println("ProductService.insertProductOption");
-        Map<String, List<String>> productOptionData = productInsertRequestDto.getProductOptionData();
-        System.out.println("productInsertRequestDto = " + productInsertRequestDto);
+        Map<String, List<String>> productOptionData = productRequestDto.getProductOptionData();
+        System.out.println("productRequestDto = " + productRequestDto);
          return productOptionData.keySet().stream().map(optionName -> productOptionDao
-                .insert(new OptionRequestDto(productInsertRequestDto.getProductNumber(),
+                .insert(new OptionRequestDto(productRequestDto.getProductNumber(),
                         optionName, productOptionData.get(optionName), true)))
                  .allMatch(d -> true);
     }
@@ -147,6 +148,7 @@ public class ProductService {
 
     public Map<String, List<ProductOptionDto>> selectProductOption(int productNumber) {
         List<ProductOptionDto> options = productOptionDao.selectOptions(productNumber);
+        System.out.println("options = " + options);
         return options.stream()
                 .collect(Collectors.groupingBy(
                         ProductOptionDto::getOptionName,
@@ -162,7 +164,15 @@ public class ProductService {
         return productOptionDao.selectOption(optionNumber);
     }
 
-    public void insertOption(OptionRequestDto optionRequestDto) {
-        productOptionDao.insert(optionRequestDto);
+    public boolean insertOption(OptionRequestDto optionRequestDto) {
+        return productOptionDao.insert(optionRequestDto);
+    }
+
+    public boolean deleteOption(OptionDeleteRequestDto optionDeleteRequestDto) {
+        return productOptionDao.deleteOption(optionDeleteRequestDto);
+    }
+
+    public boolean deleteOptionValue(int optionNumber) {
+        return productOptionDao.deleteOptionValue(optionNumber);
     }
 }

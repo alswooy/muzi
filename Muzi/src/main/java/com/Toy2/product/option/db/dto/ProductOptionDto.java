@@ -1,18 +1,31 @@
 package com.Toy2.product.option.db.dto;
 
-public class ProductOptionDto {
-    private final int optionNumber;
-    private final int productNumber;
-    private final String optionName;
-    private final String optionDetail;
-    private final boolean status;
+import com.Toy2.product.option.OptionType;
 
-    public ProductOptionDto(int optionNumber, int productNumber, String optionName, String optionDetail, boolean status) {
+import java.beans.ConstructorProperties;
+
+public class ProductOptionDto {
+    private int optionNumber;
+    private int productNumber;
+    private String optionName;
+    private String optionDetail;
+    private boolean status;
+    private boolean required;
+    private String optionType;
+
+
+    @ConstructorProperties({"optionNumber", "productNumber", "optionName", "optionDetail", "status", "required", "optionType"})
+    public ProductOptionDto(int optionNumber, int productNumber, String optionName, String optionDetail, boolean status, boolean required, String optionType) {
         this.optionNumber = optionNumber;
         this.productNumber = productNumber;
         this.optionName = optionName;
         this.optionDetail = optionDetail;
         this.status = status;
+        this.required = required;
+        this.optionType = OptionType.validate(optionType);
+    }
+
+    public ProductOptionDto() {
     }
 
     public int getOptionNumber() {
@@ -35,6 +48,14 @@ public class ProductOptionDto {
         return status;
     }
 
+    public boolean isRequired() {
+        return required;
+    }
+
+    public String getOptionType() {
+        return optionType;
+    }
+
     @Override
     public String toString() {
         return "ProductOptionDto{" +
@@ -43,6 +64,8 @@ public class ProductOptionDto {
                 ", optionName='" + optionName + '\'' +
                 ", optionDetail='" + optionDetail + '\'' +
                 ", status=" + status +
+                ", required=" + required +
+                ", optionType=" + optionType +
                 '}';
     }
 }

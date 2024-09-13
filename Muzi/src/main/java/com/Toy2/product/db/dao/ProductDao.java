@@ -1,7 +1,7 @@
 package com.Toy2.product.db.dao;
 
 import com.Toy2.product.db.dto.ProductDto;
-import com.Toy2.product.db.dto.request.ProductInsertRequestDto;
+import com.Toy2.product.db.dto.request.ProductRequestDto;
 import com.Toy2.product.db.dto.request.ProductPageRequestDto;
 import com.Toy2.product.db.dto.request.ProductUpdateRequestDto;
 
@@ -12,7 +12,7 @@ public interface ProductDao {
     int count();
 
     boolean insert(ProductDto build);
-    boolean insert(ProductInsertRequestDto build);
+    boolean insert(ProductRequestDto build);
 
     ProductDto select(int productNumber);
     List<ProductDto> selectPage(ProductPageRequestDto pageRequestDto);
